@@ -9,4 +9,8 @@ declare -r source_dir=$(cd "$script_dir/../src/" && pwd)
 
 function die() { echo >&2 "$@"; exit 1; }
 
+echo "Building image"
 docker build --tag django-docker "$source_dir"
+
+echo "Testing image"
+docker run --rm -it django-docker bash -c 'python -m unittest discover --start-directory /opt/test'
