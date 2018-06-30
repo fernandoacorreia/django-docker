@@ -5,7 +5,8 @@
 set -o nounset -o errexit -o pipefail
 
 declare -r script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+declare -r source_dir=$(cd "$script_dir/../src/" && pwd)
 
 function die() { echo >&2 "$@"; exit 1; }
 
-docker build --tag django-docker .
+docker build --tag django-docker "$source_dir"
